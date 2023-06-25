@@ -6,6 +6,7 @@ import me.lucko.fabric.api.permissions.v0.Permissions;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.ClickEvent;
+import net.minecraft.text.HoverEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
@@ -33,18 +34,24 @@ public final class LimboLogic {
 
     public static void sendJoinNotification(ServerPlayerEntity player, LimboNetworkHandler handler) {
         player.sendMessage(Text.translatable(
-            "message.arstotzka.new_connection.1",
+            "message.arstotzka.new_connection",
             Text.literal(handler.getPlayer().getGameProfile().getName())
                 .formatted(Formatting.AQUA),
             Text.literal(handler.connectionId())
-                .formatted(Formatting.YELLOW)
-        ));
-        player.sendMessage(Text.translatable(
-            "message.arstotzka.new_connection.2",
-            Text.translatable("message.arstotzka.new_connection.approve")
-                .styled(x -> x.withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/arstotzka approve " + handler.connectionId()))),
-            Text.translatable("message.arstotzka.new_connection.reject")
-                .styled(x -> x.withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/arstotzka reject " + handler.connectionId())))
+                .formatted(Formatting.YELLOW),
+            Text.empty()
+                .append(Text.literal("✔")
+                    .formatted(Formatting.GREEN)
+                    .styled(x -> x
+                        .withHoverEvent(HoverEvent.Action.SHOW_TEXT.buildHoverEvent(Text.translatable("message.arstotzka.new_connection.approve")))
+                        .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/arstotzka approve " + handler.connectionId()))))
+                .append(Text.literal(" | ")
+                    .formatted(Formatting.DARK_GRAY))
+                .append(Text.literal("✘")
+                    .formatted(Formatting.DARK_RED)
+                    .styled(x -> x
+                        .withHoverEvent(HoverEvent.Action.SHOW_TEXT.buildHoverEvent(Text.translatable("message.arstotzka.new_connection.reject")))
+                        .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/arstotzka reject " + handler.connectionId()))))
         ));
     }
 
