@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "arstotzka",
+	"version": "${version}",
+	"name": "Arstotzka",
+	"description": "Waiting rooms and bans for integrated servers",
+	"authors": [
+		"BasiqueEvangelist"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/arstotzka",
+		"sources": "https://github.com/BasiqueEvangelist/Arstotzka"
+	},
+	"license": "LGPL-3.0-only",
+	"icon": "assets/arstotzka/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"me.basiqueevangelist.arstotzka.Arstotzka"
+		]
+	},
+	"mixins": [
+		"arstotzka.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.21",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*",
+		"polymer-networking": ">=0.5.3",
+		"server_translations_api": "*",
+		"fabric-permissions-api-v0": "*"
+	},
+	"suggests": {
+		"e4mc_minecraft": "*"
+	}
+}

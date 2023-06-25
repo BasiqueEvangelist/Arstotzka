@@ -1,0 +1,18 @@
+{
+    "message.arstotzka.welcome_to_limbo.1": "§fYou are connecting as %s§f#%s§f.",
+    "message.arstotzka.welcome_to_limbo.2": "§fThe server owner will let you in shortly.",
+
+    "message.arstotzka.approved.1": "§aYou were approved by the server owner!",
+    "message.arstotzka.approved.2": "§aConnecting...",
+
+    "message.arstotzka.rejected": "§4Rejected from server",
+
+    "message.arstotzka.new_connection.1": "§%s§f#%s§f is trying to join",
+    "message.arstotzka.new_connection.2": "%s %s",
+    "message.arstotzka.new_connection.approve": "§8[§aApprove§8]",
+    "message.arstotzka.new_connection.reject": "§8[§4Reject§8]",
+
+    "commands.arstotzka.no_such_connection": "No such connection",
+    "commands.arstotzka.approve": "§aApproved %s§f#%s§a.",
+    "commands.arstotzka.reject": "§aRejected %s§f#%s§a."
+}
