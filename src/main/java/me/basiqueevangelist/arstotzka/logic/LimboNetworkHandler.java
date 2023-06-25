@@ -15,14 +15,18 @@ import net.minecraft.text.HoverEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
+import java.util.concurrent.TimeUnit;
+
 // Mostly copied from https://github.com/Patbox/polymer/blob/dev/1.20/polymer-autohost/src/main/java/eu/pb4/polymer/autohost/impl/ResourcePackNetworkHandler.java#L24
 // ;)
 public class LimboNetworkHandler extends EarlyPlayNetworkHandler {
     private static final ArmorStandEntity FAKE_ENTITY = new ArmorStandEntity(EntityType.ARMOR_STAND, PolymerCommonUtils.getFakeWorld());
     private final String connectionId = Base62.random(8);
+    private final long connectedAtNanos;
 
     public LimboNetworkHandler(Context context) {
         super(Arstotzka.id("limbo"), context);
+        this.connectedAtNanos = System.nanoTime();
 
         var player = getPlayer();
 
@@ -65,6 +69,16 @@ public class LimboNetworkHandler extends EarlyPlayNetworkHandler {
                 .formatted(Formatting.YELLOW)
         ), false));
         sendPacket(new GameMessageS2CPacket(Text.translatable("message.arstotzka.welcome_to_limbo.2"), false));
+    }
+
+    @Override
+    protected void onTick() {
+        long now = System.nanoTime();
+
+        if ((now - connectedAtNanos) >= TimeUnit.SECONDS.toNanos(30)) {
+            disconnect(Text.translatable("message.arstotzka.join_timeout"));
+            LimboLogic.leave(this);
+        }
     }
 
     public void approve() {

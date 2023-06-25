@@ -6,6 +6,7 @@
     "message.arstotzka.approved.2": "§aConnecting...",
 
     "message.arstotzka.rejected": "§4Rejected from server",
+    "message.arstotzka.join_timeout": "§4Join request timed out",
 
     "message.arstotzka.new_connection.1": "§%s§f#%s§f is trying to join",
     "message.arstotzka.new_connection.2": "%s %s",
