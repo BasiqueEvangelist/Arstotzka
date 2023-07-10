@@ -6,11 +6,6 @@ import io.wispforest.owo.config.annotation.Modmenu;
 @Config(name = "arstotzka", wrapperName = "ArstotzkaConfig")
 @Modmenu(modId = "arstotzka")
 public class ArstotzkaConfigModel {
-    public Mode mode = Mode.HOLD;
-
-    public enum Mode {
-        ALLOW,
-        HOLD,
-        DENY,
-    }
+    public boolean waitingRoom = true;
+    public boolean joinQueue = true;
 }

@@ -3,8 +3,9 @@ package me.basiqueevangelist.arstotzka;
 import eu.pb4.polymer.networking.api.EarlyPlayNetworkHandler;
 import me.basiqueevangelist.arstotzka.command.ApproveRejectCommand;
 import me.basiqueevangelist.arstotzka.config.ArstotzkaConfig;
-import me.basiqueevangelist.arstotzka.logic.LimboLogic;
-import me.basiqueevangelist.arstotzka.logic.LimboNetworkHandler;
+import me.basiqueevangelist.arstotzka.joinqueue.JoinQueueConnection;
+import me.basiqueevangelist.arstotzka.limbo.LimboNetworkHandler;
+import me.basiqueevangelist.arstotzka.waitingroom.WaitingRoomConnection;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -24,7 +25,8 @@ public class Arstotzka implements ModInitializer {
 	public void onInitialize() {
 		LOGGER.info("Glory to Arstotzka!");
 
-		LimboLogic.init();
+		WaitingRoomConnection.init();
+		JoinQueueConnection.init();
 		EarlyPlayNetworkHandler.register(LimboNetworkHandler::new);
 
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {

@@ -1,12 +1,14 @@
 {
-    "message.arstotzka.welcome_to_limbo.1": "§fYou are connecting as %s§f#%s§f.",
-    "message.arstotzka.welcome_to_limbo.2": "§fThe server owner will let you in shortly.",
+    "message.arstotzka.waiting_room.1": "§fYou are connecting as %s§f#%s§f.",
+    "message.arstotzka.waiting_room.2": "§fThe server owner will let you in shortly.",
 
     "message.arstotzka.approved.1": "§aYou were approved by the server owner!",
     "message.arstotzka.approved.2": "§aConnecting...",
 
     "message.arstotzka.rejected": "§4Rejected from server",
     "message.arstotzka.join_timeout": "§4Join request timed out",
+
+    "message.arstotzka.join_queue": "§fYou are %s out of %s in the queue.",
 
     "message.arstotzka.new_connection": "§%s§f#%s§f is trying to join §7[%s§7]",
     "message.arstotzka.new_connection.approve": "§aApprove",

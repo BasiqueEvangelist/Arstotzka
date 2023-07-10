@@ -5,8 +5,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
-import me.basiqueevangelist.arstotzka.logic.LimboLogic;
-import me.basiqueevangelist.arstotzka.logic.LimboNetworkHandler;
+import me.basiqueevangelist.arstotzka.waitingroom.WaitingRoomConnection;
 import me.lucko.fabric.api.permissions.v0.Permissions;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
@@ -36,7 +35,7 @@ public class ApproveRejectCommand {
     private static int approve(CommandContext<ServerCommandSource> ctx) throws CommandSyntaxException {
         ServerCommandSource src = ctx.getSource();
         String connectionId = StringArgumentType.getString(ctx, "connection");
-        LimboNetworkHandler connection = LimboLogic.onHold().get(connectionId);
+        WaitingRoomConnection connection = WaitingRoomConnection.onHold().get(connectionId);
 
         if (connection == null)
             throw NO_SUCH_CONNECTION.create();
@@ -45,9 +44,9 @@ public class ApproveRejectCommand {
 
         src.sendFeedback(() -> Text.translatable(
             "commands.arstotzka.approve",
-            Text.literal(connection.getPlayer().getGameProfile().getName())
+            Text.literal(connection.handler().getPlayer().getGameProfile().getName())
                 .formatted(Formatting.AQUA),
-            Text.literal(connection.connectionId())
+            Text.literal(connection.handler().connectionId())
                 .formatted(Formatting.YELLOW)
         ), true);
 
@@ -57,7 +56,7 @@ public class ApproveRejectCommand {
     private static int reject(CommandContext<ServerCommandSource> ctx) throws CommandSyntaxException {
         ServerCommandSource src = ctx.getSource();
         String connectionId = StringArgumentType.getString(ctx, "connection");
-        LimboNetworkHandler connection = LimboLogic.onHold().get(connectionId);
+        WaitingRoomConnection connection = WaitingRoomConnection.onHold().get(connectionId);
 
         if (connection == null)
             throw NO_SUCH_CONNECTION.create();
@@ -66,9 +65,9 @@ public class ApproveRejectCommand {
 
         src.sendFeedback(() -> Text.translatable(
             "commands.arstotzka.reject",
-            Text.literal(connection.getPlayer().getGameProfile().getName())
+            Text.literal(connection.handler().getPlayer().getGameProfile().getName())
                 .formatted(Formatting.AQUA),
-            Text.literal(connection.connectionId())
+            Text.literal(connection.handler().connectionId())
                 .formatted(Formatting.YELLOW)
         ), true);
 
